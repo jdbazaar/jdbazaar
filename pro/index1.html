@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>JD BAZAAR</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+    Theme Name: BizPage
+    Theme URL: https://bootstrapmade.com/bizpage-bootstrap-business-template/
+    Author: BootstrapMade.com
+    License: https://bootstrapmade.com/license/
+  ======================================================= -->
+
+        <link rel="stylesheet" href="main/css/style.css">
+
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script>window.html5 || document.write('<script src="main/js/vendor/html5shiv.js"><\/script>')</script>
+        <![endif]-->
+    <script>
+jQuery(document).ready(function( $ ) {
+
+  // Back to top button
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 100) {
+      $('.back-to-top').fadeIn('slow');
+    } else {
+      $('.back-to-top').fadeOut('slow');
+    }
+  });
+  $('.back-to-top').click(function(){
+    $('html, body').animate({scrollTop : 0},1500, 'easeInOutExpo');
+    return false;
+  });
+
+  // Initiate the wowjs animation library
+  new WOW().init();
+
+  // Initiate superfish on nav menu
+  $('.nav-menu').superfish({
+    animation: {
+      opacity: 'show'
+    },
+    speed: 400
+  });
+
+  // Mobile Navigation
+  if ($('#nav-menu-container').length) {
+    var $mobile_nav = $('#nav-menu-container').clone().prop({
+      id: 'mobile-nav'
+    });
+    $mobile_nav.find('> ul').attr({
+      'class': '',
+      'id': ''
+    });
+    $('body').append($mobile_nav);
+    $('body').prepend('<button type="button" id="mobile-nav-toggle"><i class="fa fa-bars"></i></button>');
+    $('body').append('<div id="mobile-body-overly"></div>');
+    $('#mobile-nav').find('.menu-has-children').prepend('<i class="fa fa-chevron-down"></i>');
+
+    $(document).on('click', '.menu-has-children i', function(e) {
+      $(this).next().toggleClass('menu-item-active');
+      $(this).nextAll('ul').eq(0).slideToggle();
+      $(this).toggleClass("fa-chevron-up fa-chevron-down");
+    });
+
+    $(document).on('click', '#mobile-nav-toggle', function(e) {
+      $('body').toggleClass('mobile-nav-active');
+      $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
+      $('#mobile-body-overly').toggle();
+    });
+
+    $(document).click(function(e) {
+      var container = $("#mobile-nav, #mobile-nav-toggle");
+      if (!container.is(e.target) && container.has(e.target).length === 0) {
+        if ($('body').hasClass('mobile-nav-active')) {
+          $('body').removeClass('mobile-nav-active');
+          $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
+          $('#mobile-body-overly').fadeOut();
+        }
+      }
+    });
+  } else if ($("#mobile-nav, #mobile-nav-toggle").length) {
+    $("#mobile-nav, #mobile-nav-toggle").hide();
+  }
+
+  // Smooth scroll for the menu and links with .scrollto classes
+  $('.nav-menu a, #mobile-nav a, .scrollto').on('click', function() {
+    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      if (target.length) {
+        var top_space = 0;
+
+        if ($('#header').length) {
+          top_space = $('#header').outerHeight();
+
+          if( ! $('#header').hasClass('header-fixed') ) {
+            top_space = top_space - 20;
+          }
+        }
+
+        $('html, body').animate({
+          scrollTop: target.offset().top - top_space
+        }, 1500, 'easeInOutExpo');
+
+        if ($(this).parents('.nav-menu').length) {
+          $('.nav-menu .menu-active').removeClass('menu-active');
+          $(this).closest('li').addClass('menu-active');
+        }
+
+        if ($('body').hasClass('mobile-nav-active')) {
+          $('body').removeClass('mobile-nav-active');
+          $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
+          $('#mobile-body-overly').fadeOut();
+        }
+        return false;
+      }
+    }
+  });
+
+  // Header scroll class
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 100) {
+      $('#header').addClass('header-scrolled');
+    } else {
+      $('#header').removeClass('header-scrolled');
+    }
+  });
+
+  // Intro carousel
+  var introCarousel = $(".carousel");
+  var introCarouselIndicators = $(".carousel-indicators");
+  introCarousel.find(".carousel-inner").children(".carousel-item").each(function(index) {
+    (index === 0) ?
+    introCarouselIndicators.append("<li data-target='#introCarousel' data-slide-to='" + index + "' class='active'></li>") :
+    introCarouselIndicators.append("<li data-target='#introCarousel' data-slide-to='" + index + "'></li>");
+  });
+
+  $(".carousel").swipe({
+    swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+      if (direction == 'left') $(this).carousel('next');
+      if (direction == 'right') $(this).carousel('prev');
+    },
+    allowPageScroll:"vertical"
+  });
+
+  // Skills section
+  $('#skills').waypoint(function() {
+    $('.progress .progress-bar').each(function() {
+      $(this).css("width", $(this).attr("aria-valuenow") + '%');
+    });
+  }, { offset: '80%'} );
+
+  // jQuery counterUp (used in Facts section)
+  $('[data-toggle="counter-up"]').counterUp({
+    delay: 10,
+    time: 1000
+  });
+
+  // Porfolio isotope and filter
+  var portfolioIsotope = $('.portfolio-container').isotope({
+    itemSelector: '.portfolio-item',
+    layoutMode: 'fitRows'
+  });
+
+  $('#portfolio-flters li').on( 'click', function() {
+    $("#portfolio-flters li").removeClass('filter-active');
+    $(this).addClass('filter-active');
+
+    portfolioIsotope.isotope({ filter: $(this).data('filter') });
+  });
+
+  // Clients carousel (uses the Owl Carousel library)
+  $(".clients-carousel").owlCarousel({
+    autoplay: true,
+    dots: true,
+    loop: true,
+    responsive: { 0: { items: 2 }, 768: { items: 4 }, 900: { items: 6 }
+    }
+  });
+
+  // Testimonials carousel (uses the Owl Carousel library)
+  $(".testimonials-carousel").owlCarousel({
+    autoplay: true,
+    dots: true,
+    loop: true,
+    items: 1
+  });
+
+});
+$(document).ready(()=> {
+  'use strict';
+
+    var owl = $('.owl-carousel'),
+        item,
+        itemsBgArray = [], // to store items background-image
+        itemBGImg;
+  
+    owl.owlCarousel({  
+        items: 1,
+        smartSpeed: 1000,
+        autoplay: true,
+        autoplayTimeout: 8000,
+        autoplaySpeed: 1000,
+        loop: true,
+        nav: true,
+        navText: false,
+        onTranslated: function () {
+            changeNavsThump();
+        }
+    });
+  
+    $('.active').addClass('anim');
+  
+    var owlItem = $('.owl-item'),
+        owlLen = owlItem.length;
+    /* --------------------------------
+      * store items bg images into array
+    --------------------------------- */
+    $.each(owlItem, function( i, e ) {
+        itemBGImg = $(e).find('.owl-item-bg').attr('src');
+        itemsBgArray.push(itemBGImg);
+    });
+    /* --------------------------------------------
+      * nav control thump
+      * nav control icon
+    --------------------------------------------- */
+    var owlNav = $('.owl-nav'),
+        el;
+    
+    $.each(owlNav.children(), function (i,e) {
+        el = $(e);
+        // append navs thump/icon with control pattern(owl-prev/owl-next)
+        el.append('<div class="'+ el.attr('class').match(/owl-\w{4}/) +'-thump">');
+        el.append('<div class="'+ el.attr('class').match(/owl-\w{4}/) +'-icon">');
+    });
+    
+    /*-------------------------------------------
+      Change control thump on each translate end
+    ------------------------------------------- */
+    function changeNavsThump() {
+        var activeItemIndex = parseInt($('.owl-item.active').index()),
+            // if active item is first item then set last item bg-image in .owl-prev-thump
+            // else set previous item bg-image
+            prevItemIndex = activeItemIndex != 0 ? activeItemIndex - 1 : owlLen - 1,
+            // if active item is last item then set first item bg-image in .owl-next-thump
+            // else set next item bg-image
+            nextItemIndex = activeItemIndex != owlLen - 1 ? activeItemIndex + 1 : 0;
+        
+        $('.owl-prev-thump').css({
+            backgroundImage: 'url(' + itemsBgArray[prevItemIndex] + ')'
+        });
+        
+        $('.owl-next-thump').css({
+            backgroundImage: 'url(' + itemsBgArray[nextItemIndex] + ')'
+        });
+    }
+    changeNavsThump();
+});
+
+</script>
+
+  </head>
+
+<body>
+
+  <!--==========================
+    Header
+  ============================-->
+  <header id="header">
+    <div class="container-fluid">
+
+      <div id="logo" class="pull-left">
+	 
+        <h1><a href="#intro" class="scrollto">JD BAZAAR</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
+      </div>
+
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li class="menu-active"><a href="#intro">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+        
+		   <li class="menu-has-children"><a href="#services">Products</a>
+            <ul>
+           <li><a href="pro/mens.html">MensWear</a></li>
+              <li><a href="pro/ladies.html">LadiesWear</a></li>
+              <li><a href="pro/kids.html">KidsWear</a></li>
+              <li><a href="pro/accessories.html">Accessories</a></li>
+            </ul>
+          </li>
+		 
+          <li><a href="#portfolio">Gallery</a></li>
+          <li><a href="#team">Team</a></li>
+          <li class="menu-has-children"><a href="slider.html">Store Locator</a>
+            <ul>
+              <li><a href="slider.html">Bishnupur</a></li>
+              <li><a href="slider.html">Jaynagar</a></li>
+              <li><a href="slider.html">Kakdwip</a></li>
+              <li><a href="slider.html">Lucknow</a></li>
+            </ul>
+          </li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+
+  <!--==========================
+    Intro Section
+  ============================-->
+  <section id="intro">
+    <div class="intro-container">
+      <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+
+        <ol class="carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+<div class="carousel-item active">
+		  <img src="img/intro-carousel/aboutt.gif" class="responsive-image">
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2><br><br><br></h2>
+                <p><br><br><br></p>
+               <!--  <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>-->
+																																																																	
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+		  		  <img src="img/intro-carousel/main.png" class="responsive-image">
+           <!-- <div class="carousel-container">
+              <div class="carousel-content">
+                <h2>Temporibus autem quibusdam</h2>
+                <p>Beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt omnis iste natus error sit voluptatem accusantium.</p>
+                <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>
+              </div>
+            </div>-->
+          </div>
+  
+
+          <div class="carousel-item">
+		  		  <img src="img/intro-carousel/jeans1.png" class="responsive-image">
+           <div class="carousel-container">
+              <div class="carousel-content">
+              <!--   <h2>JD BAZAAR</h2>
+                <p<br>Welcome to the divine world of fashion. Get ready to fill your wardrobe with trendy outfits.Jd Bazaar is a putative place for all sorts of 
+				clothes; from traditional to modern, Indian to western, formal to party wear. Your hunt for the stylish apparels gets completed with us. 
+				Stay updated with the latest trends and be in fad with the classy and state-of-the-art dresses. Our product portfolio is certainly based 
+				on the contemporary market trends though we know not to ignore the traditionalism, with which a great many Indians are compatible enough. 
+				So, flaunt your style with the astounding garments and make everyone envious with your gesture.</p>
+               <!--  <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>-->
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+		  		  <img src="img/intro-carousel/3.png" class="responsive-image">
+           <!-- <div class="carousel-container">
+              <div class="carousel-content">
+                <h2>Temporibus autem quibusdam</h2>
+                <p>Beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt omnis iste natus error sit voluptatem accusantium.</p>
+                <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>
+              </div>
+            </div>-->
+          </div>
+
+          <div class="carousel-item">
+		  		  <img src="img/intro-carousel/2.png" class="responsive-image">
+         <!--   <div class="carousel-container">
+              <div class="carousel-content">
+                <h2>Nam libero tempore</h2>
+                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum.</p>
+                <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>
+              </div>
+            </div>-->
+          </div>
+
+          <div class="carousel-item">
+		  <img src="img/intro-carousel/1.png" class="responsive-image">
+            <!--<div class="carousel-container">
+              <div class="carousel-content">
+                <h2>Magnam aliquam quaerat</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>
+              </div>
+            </div>
+          </div>-->
+
+        </div>
+
+        <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+
+        <a class="carousel-control-next" href="#introCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+
+      </div>
+    </div>
+	
+  </section><!-- #intro -->
+
+  <main id="main">
+
+	
+	    <div id="tf-about">
+			 <div class="wee">
+<div class="line">
+	<strong>The Wait Has Now Come To an end</strong>
+</div>
+
+<div class="line">
+<strong>To Transform shopping into an experience</strong>
+</div>
+
+<div class="line">
+	<strong>Whatever you’ve got in mind,we’ve got inside</strong>
+</div>
+
+<div class="line">
+	<mark><em><strong>JdBazaar</strong></em></mark>
+</div>
+<div class="line">
+	<strong>Opening Soon </strong>
+</div>
+</div>
+<div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/SplitText.min.js'></script>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:800" rel="stylesheet">
+
+    <script>var line = $('.line');
+
+var tl = new TimelineLite({
+			onComplete: function(){
+				tl.restart();
+			}
+		});
+
+ 
+TweenLite.defaultEase = Circ.easeInOut;
+
+var time = 0.9;
+var y = 100;
+
+tl
+	.add ( TweenMax.staggerFromTo (
+		line, time,
+			{
+				opacity: 0,
+				y:y,
+			},
+			{	
+				opacity: 1,
+				y: 0,
+			},
+		2 ))
+	.add ( TweenMax.staggerTo (
+		line, time,
+			{
+				delay: time,
+				opacity: 0,
+				y: -y,
+			},
+		2 ), 1.3)</script>
+            
+            </div>
+        </div>
+  </div>
+        <div class="container">
+
+            <div class="row">
+			<div class="abouut">
+                <div class="col-md-6">
+                    
+                </div>
+                </div>
+				<div class="anime">
+				
+				
+				
+				</div>
+            </div>
+        </div>
+    </div>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    <!--==========================
+      Services Section
+    ============================-->
+    <section id="services">
+      <div class="container">
+
+        <header class="section-header wow fadeInUp">
+          <h3>Products</h3>
+          <p>Get Varities of product for all age group..</p>
+        </header>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
+            <div class="icon"><i class="ion-ios-analytics-outline"></i></div>
+            <h4 class="title"><a href="reload.html">MensWear</a></h4>
+            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+          </div>
+          <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
+            <div class="icon"><i class="ion-ios-bookmarks-outline"></i></div>
+            <h4 class="title"><a href="reload.html">LadiesWear</a></h4>
+            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+          </div>
+          <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
+            <div class="icon"><i class="ion-ios-paper-outline"></i></div>
+            <h4 class="title"><a href="reload.html">KidsWear</a></h4>
+            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+          </div>
+          <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+            <div class="icon"><i class="ion-ios-speedometer-outline"></i></div>
+            <h4 class="title"><a href="reload.html">Accessories</a></h4>
+            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+          </div>
+          <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+            <div class="icon"><i class="ion-ios-barcode-outline"></i></div>
+            <h4 class="title"><a href="reload.html">*Accessories</a></h4>
+            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+          </div>
+          <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+            <div class="icon"><i class="ion-ios-people-outline"></i></div>
+            <h4 class="title"><a href="reload.html">*LadiesWear</a></h4>
+            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- #services 
+	
+	
+<embed type="text/html" src="main/ent.html" scrolling="no" frameborder="0" width="100%" height="1030%">
+	
+	<iframe src="slider.html" name="targetframe" allowTransparency="true" scrolling="no" frameborder="0" width="100%">
+    </iframe>
+    <div class="ent" style="width:100%; height:1030px;">  <iframe src="main/ent.html" frameborder="0"style="width:100%; height:1030%;"></iframe></div>
+  -->
+<iframe src="slider.html" name="targetframe" allowTransparency="true" scrolling="no" frameborder="0" width="100%">
+    </iframe>
+    
+        <!-- PRELOADER -->
+        <div id="preloader">
+            <div class="preloader-area">
+            	<div class="preloader-box">
+            		<div class="preloader"></div>
+            	</div>
+            </div>
+        </div>
+
+
+
+        
+        
+        <section class="service-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 wow fadeInRight animated" data-wow-delay="0.1s">
+                        <div class="service-item">
+                            <i class="pe-7s-settings"></i>
+                            <h3>SETTING</h3>
+                            <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInRight animated" data-wow-delay="0.2s">
+                        <div class="service-item">
+                            <i class="pe-7s-safe"></i>
+                            <h3>MONEY BACK</h3>
+                            <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInRight animated" data-wow-delay="0.3s">
+                        <div class="service-item">
+                            <i class="pe-7s-global"></i>
+                            <h3>WORLDWIDE Network</h3>
+                            <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInRight animated" data-wow-delay="0.4s">
+                        <div class="service-item">
+                            <i class="pe-7s-headphones"></i>
+                            <h3>Online support</h3>
+                            <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="new-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>NEW COLLECTION</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.2s">
+                        <div class="product-item">
+                            <img src="main/images/1.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Men's Tshirt</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.4s">
+                        <div class="product-item">
+                            <img src="main/images/2.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>WOMAN shirt</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.6s">
+                        <div class="product-item">
+                            <img src="main/images/1.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Men's Shirt</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.8s">
+                        <div class="product-item">
+                            <img src="main/images/4.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>FEATURED PRODUCTS</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="filter-menu">
+                            <ul class="button-group sort-button-group">
+                                <li class="button active" data-category="all">All<span>8</span></li>
+                                <li class="button" data-category="cat-1">Dresses and Suits<span>2</span></li>
+                                <li class="button" data-category="cat-2">Accessories<span>2</span></li>
+                                <li class="button" data-category="cat-3">Miscellaneous<span>4</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row featured isotope">
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="main/images/product1.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="new-item">New</a>
+                                <a href="#" class="sell-item">Sell</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-2 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="main/images/product2.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="new-item">New</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-1 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="main/images/product3.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="new-item">New</a>
+                                
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="main/images/product4.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-2 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="main/images/product5.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                               
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="main/images/product6.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="new-item">New</a>
+                                
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-1 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="main/images/product7.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="new-item">New</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="main/images/product8.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+	
+        <section class="offer-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 wow fadeInDown animated ">
+                        <h1>END OF SEASON SALE</h1>
+                        <h2>Up to 35% off on Clothing And Accesories</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="best-seller-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>BEST SELLERS</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 wow fadeInDown animated" data-wow-delay="0.2s">
+                        <div class="product-item">
+                            <img src="main/images/1.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Blue Tshirt</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInDown animated" data-wow-delay="0.4s">
+                        <div class="product-item">
+                            <img src="main/images/2.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>WOMAN shirt</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInDown animated" data-wow-delay="0.6s">
+                        <div class="product-item">
+                            <img src="main/images/1.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>YELLOW Tshirt</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInDown animated" data-wow-delay="0.8s">
+                        <div class="product-item">
+                            <img src="main/images/4.png" class="main/img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>₹--</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+		
+	<iframe src="slider.html" name="targetframe" allowTransparency="true" scrolling="no" frameborder="0" width="100%">
+    </iframe>
+    	
+		
+	   <!-- 
+        <section class="review-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>customer review</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="feedback" class="carousel slide feedback" data-ride="feedback">
+                        <!-- Wrapper for slides -->
+                         <!--   <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <img src="main/images/member1.png" width="320" height="439" alt="">
+                                <div class="carousel-caption">
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, </p>
+                                    <h3>- Reena -</h3>
+                                    <span>Baruipur,Kolkata</span>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="main/images/member2.png" width="320" height="439" alt="">
+                                <div class="carousel-caption">
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, </p>
+                                    <h3>- Mahesh -</h3>
+                                    <span>Baruipur,Kolkata</span>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="main/images/member3.png" width="320" height="439" alt="">
+                                <div class="carousel-caption">
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, </p>
+                                    <h3>- Sarita -</h3>
+                                    <span>Baruipur,Kolkata</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Indicators -->
+                       <!--     <ol class="carousel-indicators review-controlar">
+                            <li data-target="#feedback" data-slide-to="0" class="active">
+                                <img src="main/images/member1.png" width="320" height="439" alt="">
+                            </li>
+                            <li data-target="#feedback" data-slide-to="1">
+                                <img src="main/images/member2.png" width="320" height="439" alt="">
+                            </li>
+                            <li data-target="#feedback" data-slide-to="2">
+                                <img src="main/images/member3.png" width="320" height="439" alt="">
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+-->
+        <section class="news-letter-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="titie-section white wow fadeInDown animated ">
+                            <h1>Get Updated</h1>
+                        </div>
+                        <p>Follow a collection of news & promotions</p>
+                    </div>
+                </div>
+                <div class="row subscribe-from">
+                    <form class="form-inline col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1  wow fadeInDown animated">
+                        <div class="form-group">
+                            <input type="email" class="form-control subscribe" id="email" placeholder="Enter your email">
+                            <button class="suscribe-btn" ><i class="pe-7s-next"></i></button>
+                        </div>
+                    </form><!-- end /. form -->
+                </div><!-- end of/. row -->
+            </div><!-- end of /.container -->
+        </section><!-- end of /.news letter section -->
+
+        
+
+        <section class="news-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>Latest News</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-sm-4 wow fadeInDown animated" data-wow-delay="0.2s">
+                        <div class="blog-item">
+                            <a href="#"><img src="main/images/blog1.jpg" width="350" height="262" alt=""></a>
+                            <h3>Shop and sport the best monsoon style with #JDBazar and look amazing! Visit the store and spoil yourself with options.
+#Kolkata #Shopping</h3>
+                            <p>दुकान और खेल में सबसे अच्छा मानसून शैली #JDbazar के साथ और अद्भुत लग रहा है! स्टोर पर जाएँ और अपने आप के विकल्पों को खराब करें.
+#Kolkata #Shopping   </p>
+                            <a href="#">Read More</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wow fadeInDown animated" data-wow-delay="0.4s">
+                        <div class="blog-item">
+                            <a href="#"><img src="main/images/blog2.jpg" width="350" height="262" alt=""></a>
+                            <h3>Stand out among the crowd as you go back to class!
+Shop at #JDBazar and get all the latest trends in one place. </h3>
+                            <p> भीड़ में तुम वापस जाओ जब तुम वापस जाओ!
+#JDbazar पर खरीदें और सभी नवीनतम रुझान को एक जगह में प्राप्त करें.</p>
+                            <a href="#">Read More</a>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wow fadeInDown animated" data-wow-delay="0.6s">
+                        <div class="blog-item">
+                            <a href="#"><img src="main/images/blog3.jpg" width="350" height="262" alt=""></a>
+                            <h3>#JDBazar wishes all #EidMubarak! May your day be filled with happiness and love. </h3>
+                            <p>#JDbazar है सभी #eidmubarak! आपका दिन खुशियों और प्रेम से भरा हो ।</p>
+                            <a href="#">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+	
+	
+    <!--==========================
+      Contact Section
+    ============================
+    <section id="contact" class="section-bg wow fadeInUp">
+      <div class="container">
+
+        <div class="section-header">
+          <h3>Contact Us</h3>
+          <p>Reach Us We Are There For You 24*7..</p>
+        </div>
+
+        <div class="row contact-info">
+
+          <div class="col-md-4">
+            <div class="contact-address">
+              <i class="ion-ios-location-outline"></i>
+              <h3>Address</h3>
+			  <h5>Head Office</h5>
+              <address>9/2G,Topsia Road,ND Towers 3rd Floor,Kolkata-700046</address>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="contact-phone">
+              <i class="ion-ios-telephone-outline"></i>
+              <h3>Phone Number</h3>
+              <p><a href="tel:+155895548855">+1 5589 55488 55</a></p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="contact-email">
+              <i class="ion-ios-email-outline"></i>
+              <h3>Email</h3>
+              <p><a href="mailto:info@example.com">info@jdbazaar.com</a></p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form">
+          <div id="sendmessage">Your message has been sent. Thank you!</div>
+          <div id="errormessage"></div>
+         <div class="typeform-widget" data-url="https://akashagarwal1.typeform.com/to/nS7qEx" style="width: 100%; height: 400px;"></div> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script> <div style="font-family: Sans-Serif;font-size: 12px;color: #999;opacity: 0.5; padding-top: 5px;"> powered by <a href="https://admin.typeform.com/signup?utm_campaign=nS7qEx&utm_source=typeform.com-11743917-Basic&utm_medium=typeform&utm_content=typeform-embedded-poweredbytypeform&utm_term=EN" style="color: #999" target="_blank">Typeform</a> </div>
+		 </div>
+
+      </div>
+    </section>--><!-- #contact -->
+
+  </main>
+
+  <!--==========================
+    Footer
+  ============================-->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <h3>JD BAZAAR</h3>
+            <p>JD BAZAAR is a “One Stop Family Shop” with a comprehensive portfolio of product offerings. Range of products to suit everyone’s budget.</p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#intro">Home</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#about">About us</a></li>
+			   
+              <li><i class="ion-ios-arrow-right"></i> <a href="#services">Products</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#portfolio">Gallery</a></li>
+          <!--    <li><i class="ion-ios-arrow-right"></i> <a href="mens.html">Mens Wear</a></li>
+			   <li><i class="ion-ios-arrow-right"></i> <a href="ladies.html">Ladies Wear</a></li>
+            <li><i class="ion-ios-arrow-right"></i> <a href="kids.html">Kids Wear</a></li>
+            <li><i class="ion-ios-arrow-right"></i> <a href="accessories.html">Accessories</a></li>
+           -->
+		  		     <li><i class="ion-ios-arrow-right"></i> <a href="mens.html">Mens Wear</a></li>
+			   <li><i class="ion-ios-arrow-right"></i> <a href="ladies.html">Ladies Wear</a></li>
+            <li><i class="ion-ios-arrow-right"></i> <a href="kids.html">Kids Wear</a></li>
+            <li><i class="ion-ios-arrow-right"></i> <a href="accessories.html">Accessories</a></li>
+          
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contact Us</h4>
+            <p>
+			9/2G,Topsia Road,ND Towers 3rd Floor,Kolkata-700046<br>
+               India<br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> info@jdbazaar.com<br>
+            </p>
+
+            <div class="social-links">
+              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+              <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+            </div>
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>You would be the first to be notified..Subscribe to our newsletter and never miss any offers running in the stores.</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit"  value="Subscribe">
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>Akash Agarwal</strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!--
+          All the links in the footer should remain intact.
+          You can delete the links only if you purchased the pro version.
+          Licensing information: https://bootstrapmade.com/license/
+          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=BizPage
+        -->
+       
+      </div>
+    </div>
+  </footer><!-- #footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-migrate.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/superfish/hoverIntent.js"></script>
+  <script src="lib/superfish/superfish.min.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/counterup/counterup.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/isotope/isotope.pkgd.min.js"></script>
+  <script src="lib/lightbox/js/lightbox.min.js"></script>
+  <script src="lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+  <!-- Contact Form JavaScript File -->
+  <script src="contactform/contactform.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
+  
+        <!-- JQUERY -->
+        <script src="main/js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="main/js/vendor/bootstrap.min.js"></script>
+        <script src="main/js/isotope.pkgd.min.js"></script>
+        <script src="main/js/owl.carousel.min.js"></script>
+        <script src="main/js/wow.min.js"></script>
+        <script src="main/js/custom.js"></script>
+ 
+
+</body>
+</html>
