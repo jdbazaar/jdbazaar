@@ -156,7 +156,7 @@ h1, h2, h3, h4, h5, h6 {
 .popup h1 {
   font-size: 1em;
 }
-@media screen(max-width: 706px) {
+@media (max-width: 706px) {
     .con{
         display: block;
     }
@@ -167,7 +167,7 @@ h1, h2, h3, h4, h5, h6 {
         display: block;
     }
 }
-@media screen(min-width: 706px) {
+@media (min-width: 706px) {
     .con{
         display: visible;
     }
@@ -275,7 +275,6 @@ h1, h2, h3, h4, h5, h6 {
   float: left;
 }
 
-@media (min-width: 1024px) {
   #header #logo {
     padding-left: 60px;
   }
@@ -380,7 +379,6 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (min-width: 1024px) {
   #intro p {
-    max-width: 60%;
   }
 }
 
