@@ -11,6 +11,7 @@ body {
   background: #fff;
   color: #666666;
   font-family: "Open Sans", sans-serif;
+	overflow-x:hidden;
 }
 
 a {
@@ -155,10 +156,25 @@ h1, h2, h3, h4, h5, h6 {
 .popup h1 {
   font-size: 1em;
 }
-@media screen(max-width: 406px) {
-    .wrap{
-        display: none;
-    }}
+@media (max-width: 706px) {
+    .con{
+        display: block;
+    }
+	.ma{
+        display: block;
+    }
+	.submit{
+        display: block;
+    }
+}
+@media (min-width: 706px) {
+    .con{
+        display: visible;
+    }
+	.ma{
+        display: visible;
+    }
+}
 .popup .close {
   display: block;
   width: 28px;
@@ -259,7 +275,6 @@ h1, h2, h3, h4, h5, h6 {
   float: left;
 }
 
-@media (min-width: 1024px) {
   #header #logo {
     padding-left: 60px;
   }
@@ -364,7 +379,6 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (min-width: 1024px) {
   #intro p {
-    max-width: 60%;
   }
 }
 
