@@ -72,11 +72,34 @@
         font-family: 'Montserrat', sans-serif;
         text-align: center;
       }
+          
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #377be8;
+ 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background:#377be8; 
+  
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
       .main{
         position: absolute;
         width: 100%;
         top:40%;
         left: 0;
+          color: yellow;
+        
       }
 	  
       html, body {
@@ -84,13 +107,14 @@
      }
 
 html {
- background: #212121;
+ background: #377be8;
 }
 
 body {
  display: flex;
  justify-content: center;
  align-items: center;
+    background:  #377be8;
 }
 
 .box {
@@ -110,7 +134,7 @@ body {
  position: absolute;
  top: 3%;
  left: 50%;
- background: #0af;
+ background: yellow;
  width: 500px;
  height: 380px;
  margin-left: -250px;
@@ -151,7 +175,7 @@ body {
  line-height: 100px;
  text-align: center;
  transform: translate3d(0, 0, 0);
- color: white;
+ color: #377be8;
  text-transform: uppercase;
  font-family: 'Montserrat', sans-serif;
  letter-spacing: .4em;
@@ -170,10 +194,10 @@ body {
   <body>
    <div class="main">
      <center>
-    <div id="text-intro">Hi,</div>
-    <div id="text-mid">Welcome to the Bazaar</div>
+    <div id="text-intro"><strong>Hi,</strong></div>
+    <div id="text-mid"><strong>Welcome to the Bazaar</strong></div>
     <div id="text-mid2"><strong>JD BAZAAR</strong></div>
-    <div id="text-mid3">Here you'll find what you need </div>
+    <div id="text-mid3"><strong>Here you'll find what you need</strong> </div>
     <a href="index1.html"><div id="button-outro">
       <div class='box'>
         <div class='wave -one'></div>
