@@ -93,11 +93,17 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 1em;
   font-weight: 100;
 }
-
-@media (max-width: 668px) {
- .wrap {
+@media screen and (max-width: 406px) {
+  .ma h1 {
+    font-size: 40px;
+    padding-bottom: .5em;
+  }
+}
+@media (max-width: 706px) {
+  .wrap {
    display: none;
   }
+}
 .ma .submit {
   text-decoration: none;
   width: 110px;
@@ -156,7 +162,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media screen(max-width: 406px) {
     .wrap{
-        display: ;
+        display: none;
     }}
 .popup .close {
   display: block;
